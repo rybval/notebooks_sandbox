@@ -10,9 +10,9 @@ RUN pip install -r /tmp/requirements.txt && \
   rm /tmp/requirements.txt
 
 # Install additional kernels
-RUN apt update
+RUN apt-get update
 # gophernotes
-RUN apt install golang-go libzmq3-dev pkg-config && \
+RUN apt-get install -y golang-go libzmq3-dev pkg-config && \
   go get -u github.com/gopherdata/gophernotes && \
   mkdir -p ~/.local/share/jupyter/kernels/gophernotes && \
   cp $GOPATH/src/github.com/gopherdata/gophernotes/kernel/* /usr/local/share/jupyter/kernels/gophernotes
@@ -21,7 +21,7 @@ RUN conda install nodejs && \
   npm install -g ijavascript && \
   ijsinstall
 # C
-RUN apt install gcc && \
+RUN apt-get install -y gcc && \
   pip install jupyter-c-kernel && \
   install_c_kernel
 # C++
@@ -30,7 +30,7 @@ RUN conda install -c QuantStack -c conda-forge xeus-cling
 RUN pip install bash_kernel && \
   python -m bash_kernel.install
 # Java, Kotlin, etc.
-RUN apt install default-jre && \
+RUN apt-get install -y default-jre && \
   conda install -c conda-forge ipywidgets beakerx
 
 USER jovian
