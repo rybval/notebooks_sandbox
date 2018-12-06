@@ -1,0 +1,8 @@
+version: '2'
+services:
+  notebooks_sandbox:
+    build: ./
+    volumes:
+      - "${NOTEBOOKS_DIR}:/jupyter"
+    ports:
+      - "8888:8888"
