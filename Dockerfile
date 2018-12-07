@@ -28,6 +28,10 @@ RUN apt-get install -y gcc && \
 # Java, Kotlin, etc.
 RUN apt-get install -y default-jre
 USER $NB_UID
+RUN conda clean -y --source-cache && \
+  conda config --set remote_read_timeout_secs 300.0 && \
+  conda config --set remote_connect_timeout_secs 20.0 && \
+  conda config --set remote_max_retries 20
 RUN conda install -y -c conda-forge ipywidgets beakerx
 # C++
 RUN conda install -y -c QuantStack -c conda-forge xeus-cling
