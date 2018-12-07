@@ -27,13 +27,14 @@ RUN apt-get install -y gcc && \
   install_c_kernel
 # Java, Kotlin, etc.
 RUN apt-get install -y default-jre
-USER $NB_UID
-RUN conda install -y -c conda-forge ipywidgets beakerx
+RUN conda install -y -q -c conda-forge ipywidgets beakerx
 # C++
-RUN conda install -y -c QuantStack -c conda-forge xeus-cling
+RUN conda install -y -q -c QuantStack -c conda-forge xeus-cling
 # IJavascript
-RUN conda install -y nodejs && \
+RUN conda install -y -q nodejs && \
   npm install -g ijavascript && \
   ijsinstall
+
+USER $NB_UID
 
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
