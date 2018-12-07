@@ -18,22 +18,22 @@ RUN apt-get install -y golang-go libzmq3-dev pkg-config && \
   mkdir -p ~/.local/share/jupyter/kernels/gophernotes
 RUN mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
   cp $GOPATH/src/github.com/gopherdata/gophernotes/kernel/* /usr/local/share/jupyter/kernels/gophernotes
-# IJavascript
-RUN conda install nodejs && \
-  npm install -g ijavascript && \
-  ijsinstall
+# Bash
+RUN pip install bash_kernel && \
+  python -m bash_kernel.install
 # C
 RUN apt-get install -y gcc && \
   pip install jupyter-c-kernel && \
   install_c_kernel
+# Java, Kotlin, etc.
+RUN apt-get install -y default-jre
+RUN conda install -c conda-forge ipywidgets beakerx
 # C++
 RUN conda install -c QuantStack -c conda-forge xeus-cling
-# Bash
-RUN pip install bash_kernel && \
-  python -m bash_kernel.install
-# Java, Kotlin, etc.
-RUN apt-get install -y default-jre && \
-  conda install -c conda-forge ipywidgets beakerx
+# IJavascript
+RUN conda install nodejs && \
+  npm install -g ijavascript && \
+  ijsinstall
 
 USER jovyan
 
