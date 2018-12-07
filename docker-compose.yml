@@ -7,3 +7,4 @@ services:
       - "${NOTEBOOKS_DIR}:/jupyter"
     ports:
       - "8888:8888"
+    restart: unless-stopped
