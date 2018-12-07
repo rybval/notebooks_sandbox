@@ -35,6 +35,8 @@ RUN conda install -y -q nodejs && \
   npm install -g --unsafe-perm ijavascript && \
   ijsinstall --install=global --spec-path=full
 
+RUN fix-permissions /home/$NB_USER
+
 USER $NB_UID
 
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
