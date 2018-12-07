@@ -1,6 +1,7 @@
 version: '2'
 services:
   notebooks_sandbox:
+    image: rybval/notebooks_sandbox
     build: ./
     volumes:
       - "${NOTEBOOKS_DIR}:/jupyter"
