@@ -32,8 +32,8 @@ RUN conda install -y -q -c conda-forge ipywidgets beakerx
 RUN conda install -y -q -c QuantStack -c conda-forge xeus-cling
 # IJavascript
 RUN conda install -y -q nodejs && \
-  npm install -g ijavascript && \
-  ijsinstall
+  npm install -g --unsafe-perm ijavascript && \
+  ijsinstall --install=global --spec-path=full
 
 USER $NB_UID
 
