@@ -12,9 +12,11 @@ RUN pip install -r /tmp/requirements.txt && \
 # Install additional kernels
 RUN apt-get update
 # gophernotes
+ENV GOPATH=/home/jovyan/go
 RUN apt-get install -y golang-go libzmq3-dev pkg-config && \
   go get -u github.com/gopherdata/gophernotes && \
-  mkdir -p ~/.local/share/jupyter/kernels/gophernotes && \
+  mkdir -p ~/.local/share/jupyter/kernels/gophernotes
+RUN mkdir -p /usr/local/share/jupyter/kernels/gophernotes && \
   cp $GOPATH/src/github.com/gopherdata/gophernotes/kernel/* /usr/local/share/jupyter/kernels/gophernotes
 # IJavascript
 RUN conda install nodejs && \
@@ -33,6 +35,6 @@ RUN pip install bash_kernel && \
 RUN apt-get install -y default-jre && \
   conda install -c conda-forge ipywidgets beakerx
 
-USER jovian
+USER jovyan
 
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
