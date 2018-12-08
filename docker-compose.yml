@@ -1,10 +1,12 @@
-version: '2'
+version: '2.2'
 services:
   notebooks_sandbox:
     image: rybval/notebooks_sandbox
     build: ./
     volumes:
-      - "${NOTEBOOKS_DIR}:/jupyter"
+      - "${NOTEBOOKS_DIR}:/home/jovyan/work"
     ports:
       - "8888:8888"
+    cpus: 0.5
     restart: unless-stopped
+    command: jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --notebook-dir=/home/jovyan
