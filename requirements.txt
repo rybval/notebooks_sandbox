@@ -12,3 +12,4 @@ pymongo
 python-dateutil
 scikit-learn
 Pillow
+lxml
